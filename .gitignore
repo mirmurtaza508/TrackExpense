@@ -23,9 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 #my files
-
-package-lock.json
-package.json
 .eslintrc.cjs
 index.css
 node_modules
