@@ -26,5 +26,3 @@ dist-ssr
 .eslintrc.cjs
 index.css
 node_modules
-public
-dist
