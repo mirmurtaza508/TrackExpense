@@ -16,7 +16,7 @@ const TableExpense = ({
   });
   const total = filteredData.reduce((prev, curr) => prev + +curr.amount, 0);
   const [sortCallback, setSortCallback] = useState(() => {
-    return () => {};
+    return () => {}
   });
   return (
     <>
@@ -63,7 +63,8 @@ const TableExpense = ({
                   width="10"
                   viewBox="0 0 384 512"
                   className="arrow down-arrow"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation()
                     setSortCallback(
                       () => (a, b) => b.title.localeCompare(a.title)
                     );
@@ -134,7 +135,7 @@ const TableExpense = ({
           ))}
           <tr>
             <th>Total</th>
-            <th></th>
+            <th style={{cursor:"pointer"}} onClick={()=>setSortCallback(()=>()=>{})}>clear sort</th>
             <th>₹{total}</th>
           </tr>
         </tbody>
