@@ -14,7 +14,7 @@ const TableExpense = ({
     left: "",
     top: "",
   });
-  const total = filteredData.reduce((prev, curr) => prev + +curr.amount, 0);
+  const total = result.reduce((prev, curr) => prev + +curr.amount, 0);
   const [sortCallback, setSortCallback] = useState(() => {
     return () => {};
   });
