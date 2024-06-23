@@ -35,7 +35,9 @@ const App = () => {
           setEditingRowId={setEditingRowId}
         />
       </div>
-      <div style={{ padding: "1rem" }}>
+      <div
+        style={{ padding: "1rem", display: "flex", justifyContent: "center" }}
+      >
         <PieChartComp expenses={expenses} />
       </div>
     </main>

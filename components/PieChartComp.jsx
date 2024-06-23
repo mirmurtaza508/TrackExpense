@@ -2,67 +2,40 @@ import { PieChart } from "@mui/x-charts";
 import React from "react";
 
 const PieChartComp = ({ expenses }) => {
-  const grocery = expenses.filter((expense) =>
-    expense.category.toLowerCase().includes("grocery")
-  );
-  const groceryTotal = grocery.reduce((acc, curr) => {
-    return acc + +curr.amount;
-  }, 0);
-  const clothes = expenses.filter((expense) =>
-    expense.category.toLowerCase().includes("clothes")
-  );
-  const clothesTotal = clothes.reduce((acc, curr) => {
-    return acc + +curr.amount;
-  }, 0);
-  const bills = expenses.filter((expense) =>
-    expense.category.toLowerCase().includes("bills")
-  );
-  const billsTotal = bills.reduce((acc, curr) => {
-    return acc + +curr.amount;
-  }, 0);
-  const education = expenses.filter((expense) =>
-    expense.category.toLowerCase().includes("education")
-  );
-  const educationTotal = education.reduce((acc, curr) => {
-    return acc + +curr.amount;
-  }, 0);
-  const medicine = expenses.filter((expense) =>
-    expense.category.toLowerCase().includes("medicine")
-  );
-  const medicineTotal = medicine.reduce((acc, curr) => {
-    return acc + +curr.amount;
-  }, 0);
-  const data = [
-    {
-      id: 0,
-      value: grocery.length,
-      label: grocery.length ? `Grocery Amount => ${groceryTotal}` : undefined,
-    },
-    {
-      id: 1,
-      value: clothes.length,
-      label: clothes.length ? `Clothes  Amount => ${clothesTotal} ` : undefined,
-    },
-    {
-      id: 2,
-      value: bills.length,
-      label: bills.length ? `Bills  Amount => ${billsTotal}` : undefined,
-    },
-    {
-      id: 3,
-      value: education.length,
-      label: education.length
-        ? `Education  Amount => ${educationTotal}`
-        : undefined,
-    },
-    {
-      id: 4,
-      value: medicine.length,
-      label: medicine.length
-        ? `Medicine Amount => ${medicineTotal}`
-        : undefined,
-    },
+  // Define categories and corresponding labels
+  const categories = [
+    { name: "grocery", label: "Grocery" },
+    { name: "clothes", label: "Clothes" },
+    { name: "bills", label: "Bills" },
+    { name: "education", label: "Education" },
+    { name: "medicine", label: "Medicine" },
   ];
+
+  // Function to calculate total amount for a specific category
+  const calculateCategoryTotal = (categoryName) => {
+    return expenses
+      .filter((expense) =>
+        expense.category.toLowerCase().includes(categoryName)
+      )
+      .reduce((acc, curr) => acc + +curr.amount, 0);
+  };
+  // Create data array for PieChart
+  const data = categories
+    .map((category, index) => ({
+      id: index,
+      value: expenses.filter((expense) =>
+        expense.category.toLowerCase().includes(category.name)
+      ).length,
+      label: expenses.filter((expense) =>
+        expense.category.toLowerCase().includes(category.name)
+      ).length
+        ? `${category.label} Amount => ${calculateCategoryTotal(category.name)}`
+        : undefined,
+    }))
+    .filter((item) => item.value > 0);
+
+  console.log(data);
+
   return (
     <PieChart
       series={[
@@ -73,6 +46,11 @@ const PieChartComp = ({ expenses }) => {
         },
       ]}
       height={400}
+      legend={{
+        direction: "column",
+        position: { vertical: "bottom", horizontal: "middle" },
+      }}
+      margin={{ bottom: 60, left: 60 }}
     />
   );
 };
