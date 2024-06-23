@@ -111,6 +111,7 @@ const FormExpense = ({
         value={expense.amount}
         onChange={handleChange}
         error={errors.amount}
+        type="numeric"
       />
       <button className="add-btn">{editingRowId ? "Save" : "Add"}</button>
     </form>
