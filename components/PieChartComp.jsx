@@ -34,8 +34,6 @@ const PieChartComp = ({ expenses }) => {
     }))
     .filter((item) => item.value > 0);
 
-  console.log(data);
-
   return (
     <PieChart
       series={[

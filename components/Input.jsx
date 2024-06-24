@@ -9,7 +9,7 @@ const Input = ({ label, id, name, value, onChange, error, type }) => {
         name={name}
         value={value}
         onChange={onChange}
-        inputmode={type}
+        inputMode={type}
       />
       <p className="error">{error}</p>
     </div>

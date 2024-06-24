@@ -1,20 +1,19 @@
-import React, { useState } from "react";
 import FormExpense from "../components/FormExpense";
 import TableExpense from "../components/TableExpense";
-import expenseData from "../expense";
 import "./App.css";
+import expensesData from "../expense";
 import useLocalStorage from "../hooks/useLocalStorage";
 import PieChartComp from "../components/PieChartComp";
+import ExpenseBarChart from "../components/BarChart";
 
 const App = () => {
-  const [expenses, setExpenses] = useLocalStorage("expenses", expenseData);
+  const [expenses, setExpenses] = useLocalStorage("expenses", expensesData);
   const [editingRowId, setEditingRowId] = useLocalStorage("editingRowId", "");
   const [expense, setExpense] = useLocalStorage("expense", {
     title: "",
     category: "",
     amount: "",
   });
-
   return (
     <main>
       <h1>Track Your Expense</h1>
@@ -39,6 +38,9 @@ const App = () => {
         style={{ padding: "1rem", display: "flex", justifyContent: "center" }}
       >
         <PieChartComp expenses={expenses} />
+      </div>
+      <div>
+        <ExpenseBarChart expenses={expenses} />
       </div>
     </main>
   );

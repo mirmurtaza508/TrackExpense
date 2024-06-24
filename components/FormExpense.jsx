@@ -7,7 +7,6 @@ const FormExpense = ({
   editingRowId,
   setExpense,
   expense,
-  expenses,
   setEditingRowId,
 }) => {
   const [errors, setErrors] = useState({});
