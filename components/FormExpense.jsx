@@ -67,7 +67,11 @@ const FormExpense = ({
     }
     setExpenses((prevState) => [
       ...prevState,
-      { ...expense, id: crypto.randomUUID() },
+      {
+        ...expense,
+        id: crypto.randomUUID(),
+        date: new Date().toISOString().split("T")[0],
+      },
     ]);
     setExpense({
       title: "",

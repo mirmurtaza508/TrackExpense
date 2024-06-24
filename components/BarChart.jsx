@@ -1,16 +1,16 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
+import useCountDailyEntries from "../hooks/useCountDailyEntries";
 
 const ExpenseBarChart = ({ expenses }) => {
-  console.log(expenses);
   const categories = ["Grocery", "Clothes", "Bills", "Education", "Medicine"];
   const categoryAmounts = categories.map((category) =>
     expenses
       .filter((expense) => expense.category === category)
       .reduce((total, expense) => total + +expense.amount, 0)
   );
-  console.log(categoryAmounts);
+  const dailyEntriesCount = useCountDailyEntries(expenses);
   const data = {
     labels: categories,
     datasets: [
@@ -36,6 +36,18 @@ const ExpenseBarChart = ({ expenses }) => {
     scales: {
       y: {
         beginAtZero: true,
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: `Total Entries: ${expenses.length} | Today's Entries: ${dailyEntriesCount}       `,
+
+        position: "right",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
       },
     },
   };

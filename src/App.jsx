@@ -39,9 +39,13 @@ const App = () => {
       >
         <PieChartComp expenses={expenses} />
       </div>
-      <div>
-        <ExpenseBarChart expenses={expenses} />
-      </div>
+      {expenses.length ? (
+        <div>
+          <ExpenseBarChart expenses={expenses} />
+        </div>
+      ) : (
+        ""
+      )}
     </main>
   );
 };
