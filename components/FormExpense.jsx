@@ -52,7 +52,11 @@ const FormExpense = ({
       setExpenses((prevState) =>
         prevState.map((prevExpense) => {
           if (prevExpense.id === editingRowId) {
-            return { ...expense, id: editingRowId };
+            return {
+              ...expense,
+              id: editingRowId,
+              date: new Date().toISOString().split("T")[0],
+            };
           }
           return prevExpense;
         })
